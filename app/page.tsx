@@ -32,11 +32,15 @@ export default function BubbleWrapPage() {
 
   // Initialize Audio Context on first interaction safely
   const initAudio = () => {
-    if (!audioCtxRef.current) {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      if (AudioContext) {
-        audioCtxRef.current = new AudioContext();
+    try {
+      if (typeof window !== "undefined" && !audioCtxRef.current) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) {
+          audioCtxRef.current = new AudioContext();
+        }
       }
+    } catch (err) {
+      console.warn("Could not initialize audio context:", err);
     }
   };
 
@@ -46,8 +50,10 @@ export default function BubbleWrapPage() {
     initAudio();
     
     const ctx = audioCtxRef.current;
-    if (!ctx || ctx.state === "suspended") {
-      ctx?.resume();
+    if (!ctx) return;
+
+    if (ctx.state === "suspended") {
+      ctx.resume().catch((err) => console.log("Audio context resume failed:", err));
     }
 
     try {
@@ -121,6 +127,12 @@ export default function BubbleWrapPage() {
   // Count popped bubbles
   const poppedCount = bubbles.filter(Boolean).length;
 
+  // Safe Play Button Handler
+  const handlePlayClick = () => {
+    initAudio(); // Try to start audio
+    setScreen("game"); // Go to game instantly, no matter what
+  };
+
   // ----------------------------------------------------
   // SCREEN 1: LANDING PAGE
   // ----------------------------------------------------
@@ -128,7 +140,7 @@ export default function BubbleWrapPage() {
     return (
       <main className={styles.container}>
         <div className={styles.card}>
-          <h1 className={styles.title}>pop the bubbles ✨</h1>
+          <h1 className={styles.title}>pop my bubbles ✨</h1>
           
           <div className={styles.introText}>
             <p>
@@ -144,10 +156,7 @@ export default function BubbleWrapPage() {
 
           <button 
             className={styles.playBtn} 
-            onClick={() => {
-              initAudio(); // Warm up audio context on button press
-              setScreen("game");
-            }}
+            onClick={handlePlayClick}
           >
             PRESS THIS BUTTON TO PLAY
           </button>
@@ -163,7 +172,7 @@ export default function BubbleWrapPage() {
     <main className={styles.container}>
       {/* Soft Header */}
       <header className={styles.header}>
-        <h1 className={styles.title}>pop the bubbles ✨</h1>
+        <h1 className={styles.title}>pop my bubbles ✨</h1>
         <p className={styles.subtitle}>no rules, just pop</p>
       </header>
 
@@ -194,6 +203,14 @@ export default function BubbleWrapPage() {
         </div>
         
         <div className={styles.actions}>
+          <button 
+            className={styles.actionBtn} 
+            onClick={() => setScreen("landing")}
+            aria-label="Go back to landing page"
+          >
+            👈 back
+          </button>
+
           <button 
             className={styles.actionBtn} 
             onClick={() => setIsMuted(!isMuted)}

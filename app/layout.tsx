@@ -7,7 +7,7 @@ const fredoka = Fredoka({
 });
 
 export const metadata = {
-  title: "pop the bubbles ✨",
+  title: "pop my bubbles ✨",
   description: "A gentle, no-pressure bubble wrap popping game for anxiety relief.",
 };
 
