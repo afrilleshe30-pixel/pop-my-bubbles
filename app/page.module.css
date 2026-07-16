@@ -1,288 +1,184 @@
-/* Main Page Container */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  padding: 2rem 1rem;
-  background: linear-gradient(135deg, #E8F4FD 0%, #C5E4F7 100%);
-  user-select: none; /* Prevents text selection while clicking fast */
-  -webkit-user-select: none;
+  padding: 1rem;
+  background-color: #e3f2fd;
+  box-sizing: border-box;
 }
 
-/* Landing Page Card */
+/* Card layout for landing page */
 .card {
-  background-color: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 2.5rem 2rem;
-  border-radius: 28px;
-  max-width: 480px;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  max-width: 450px;
   width: 100%;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(174, 207, 228, 0.4), 
-              inset 0 1px 2px rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  animation: fadeIn 0.6s ease-out;
+  box-sizing: border-box;
+}
+
+.title {
+  font-family: var(--font-fredoka), sans-serif;
+  color: #4a6fa5;
+  font-size: 2rem;
+  margin: 0 0 0.5rem 0;
 }
 
 .introText {
-  margin: 1.5rem 0 2rem 0;
-  text-align: left;
-  color: #556B82;
-  font-size: 1.05rem;
+  color: #555555;
+  font-size: 0.95rem;
   line-height: 1.6;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
+  margin-bottom: 2rem;
+  text-align: left;
 }
 
 .heartText {
   font-style: italic;
   font-weight: 500;
-  color: #4A607A;
+  color: #7a8296;
   text-align: center;
-  margin-top: 0.5rem;
+  margin-top: 1.5rem;
 }
 
-/* Big Interactive Play Button */
 .playBtn {
-  background: linear-gradient(135deg, #A8D8F0 0%, #87BEDB 100%);
+  font-family: var(--font-fredoka), sans-serif;
+  background-color: #8cbcd0;
   color: white;
   border: none;
-  font-family: inherit;
-  font-size: 1.1rem;
+  padding: 1rem 2rem;
+  font-size: 1rem;
   font-weight: 600;
-  padding: 16px 32px;
-  border-radius: 24px;
+  border-radius: 50px;
   cursor: pointer;
-  letter-spacing: 0.5px;
-  box-shadow: 0 8px 20px rgba(135, 190, 219, 0.4);
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.playBtn:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 12px 24px rgba(135, 190, 219, 0.6);
+  box-shadow: 0 4px 15px rgba(140, 188, 208, 0.4);
+  transition: transform 0.2s;
+  width: 100%;
 }
 
 .playBtn:active {
-  transform: translateY(1px) scale(0.97);
+  transform: scale(0.98);
 }
 
-/* Header Elements */
+/* Game Screen Layout */
 .header {
   text-align: center;
-  margin-bottom: 2rem;
-  animation: fadeIn 0.5s ease-out;
-}
-
-.title {
-  font-size: 2.25rem;
-  color: #4A607A;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+  margin-bottom: 1.5rem;
 }
 
 .subtitle {
-  font-size: 1.1rem;
-  color: #7B93AC;
-  font-weight: 400;
+  color: #888888;
+  font-size: 0.9rem;
+  margin: 0;
 }
 
-/* Responsive Grid Layout */
+/* Board Container - Prevents any horizontal spill */
 .grid {
   display: grid;
-  gap: 10px;
-  background-color: rgba(255, 255, 255, 0.4);
-  padding: 16px;
-  border-radius: 24px;
-  box-shadow: 0 10px 30px rgba(174, 207, 228, 0.4), 
-              inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  gap: 8px;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 12px;
+  border-radius: 20px;
+  box-shadow: inset 0 2px 10px rgba(0,0,0,0.03);
   max-width: 100%;
-  width: fit-content;
-  animation: fadeIn 0.5s ease-out;
+  width: 420px; /* Perfect desktop size */
+  box-sizing: border-box;
+  margin-bottom: 1.5rem;
 }
 
-/* Individual Bubble Base */
+/* Responsive bubbles that shrink to fit any screen size */
 .bubble {
-  position: relative;
-  width: 44px;
-  height: 44px;
+  aspect-ratio: 1;
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  outline: none;
-  transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
   overflow: hidden;
-  touch-action: manipulation; /* Prevents double-tap zooming delay on mobile */
+  transition: transform 0.1s, box-shadow 0.1s;
+  width: 100%;
+  padding: 0;
 }
 
-/* Unpopped Bubble (Glossy 3D styling) */
 .unpopped {
-  background: radial-gradient(circle at 35% 35%, #C2E7FF 0%, #A8D8F0 60%, #87BEDB 100%);
+  background: radial-gradient(circle at 35% 35%, #b3e5fc 0%, #81d4fa 40%, #29b6f6 85%);
   box-shadow: 
-    0 4px 6px rgba(116, 163, 192, 0.3),
-    inset -3px -3px 6px rgba(100, 140, 170, 0.3),
-    inset 3px 3px 6px rgba(255, 255, 255, 0.9);
-  animation: idlePulse 6s ease-in-out infinite alternate;
+    inset -3px -3px 6px rgba(0, 0, 0, 0.2),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.8),
+    0 4px 6px rgba(41, 182, 246, 0.2);
 }
 
-.unpopped:hover {
-  transform: scale(1.08);
+.popped {
+  background: #e0f7fa;
+  box-shadow: 
+    inset 2px 2px 5px rgba(0, 0, 0, 0.1),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.5);
+  transform: scale(0.95);
+  opacity: 0.6;
 }
 
-.unpopped:active {
-  transform: scale(0.9);
-}
-
-/* Highlight / Shimmer overlay inside unpopped bubble */
 .shimmer {
   position: absolute;
   top: 15%;
   left: 15%;
   width: 30%;
   height: 30%;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 50%;
-  filter: blur(0.5px);
 }
 
-/* Popped Bubble (Flat, recessed styling) */
-.popped {
-  background: #B3D8ED;
-  box-shadow: 
-    inset 2px 2px 4px rgba(0, 0, 0, 0.08),
-    inset -2px -2px 4px rgba(255, 255, 255, 0.4);
-  transform: scale(0.95);
-  cursor: default;
-  animation: popEffect 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
-
-/* Hide shimmer once popped */
-.popped .shimmer {
-  display: none;
-}
-
-/* Footer & Gentle HUD */
+/* Footer & Controls */
 .footer {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1rem;
-  margin-top: auto;
-  border-top: 1px solid #eeeeee;
-  padding-top: 1rem;
-  /* 👇 ADD THIS NEW LINE 👇 */
-  align-items: center; 
+  width: 100%;
+  max-width: 420px;
+  box-sizing: border-box;
 }
 
 .stats {
   font-family: var(--font-fredoka), sans-serif;
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: #666666;
-  font-weight: 500;
-  /* 👇 ADD THIS NEW LINE 👇 */
+  font-weight: 600;
   text-align: center;
 }
 
 .actions {
   display: flex;
-  gap: 12px;
+  gap: 0.5rem;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap; /* Wraps buttons neatly if the screen is too narrow */
 }
 
-/* Control Buttons */
 .actionBtn, .refillBtn {
-  background-color: white;
-  border: none;
-  font-family: inherit;
-  font-size: 0.95rem;
+  font-family: var(--font-fredoka), sans-serif;
+  padding: 0.6rem 1rem;
+  font-size: 0.85rem;
   font-weight: 500;
-  color: #617D9B;
-  padding: 10px 18px;
-  border-radius: 20px;
+  border-radius: 12px;
+  border: none;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(174, 207, 228, 0.3);
-  transition: all 0.2s ease;
+  background: white;
+  color: #555555;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  white-space: nowrap;
 }
 
-.actionBtn:hover:not(:disabled), .refillBtn:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(174, 207, 228, 0.45);
-  color: #435E7D;
+.refillBtn {
+  background: #8cbcd0;
+  color: white;
+  font-weight: 600;
 }
 
-.actionBtn:active:not(:disabled), .refillBtn:active:not(:disabled) {
-  transform: translateY(0);
-}
-
-.refillBtn:disabled {
-  background-color: #E2ECF5;
-  color: #A1B3C4;
-  cursor: not-allowed;
-  transform: none;
-}
-
-/* ==========================================
-   ANIMATIONS & KEYFRAMES
-   ========================================== */
-
-/* Gentle entrance animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Quick squish and flatten when a bubble pops */
-@keyframes popEffect {
-  0% {
-    transform: scale(1);
-  }
-  40% {
-    transform: scale(0.85);
-  }
-  100% {
-    transform: scale(0.95);
-  }
-}
-
-/* Very subtle organic idle pulse so the board feels "alive" */
-@keyframes idlePulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.02);
-  }
-  100% {
-    transform: scale(0.98);
-  }
-}
-
-/* Responsive Scaling for smaller screens */
-@media (max-width: 500px) {
-  .card {
-    padding: 2rem 1.25rem;
-  }
-  
-  .grid {
-    gap: 6px;
-    padding: 10px;
-  }
-  
-  .bubble {
-    width: 32px; /* Scales down smoothly for mobile viewports */
-    height: 32px;
-  }
-  
-  .title {
-    font-size: 1.8rem;
-  }
+.actionBtn:active, .refillBtn:active {
+  transform: scale(0.97);
 }
