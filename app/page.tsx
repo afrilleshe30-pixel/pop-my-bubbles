@@ -31,9 +31,11 @@ export default function BubbleWrapPage() {
   const audioCtxRef = useRef(null);
 
   // Initialize Audio Context on first interaction safely
+  // Initialize Audio Context on first interaction safely
   const initAudio = () => {
     try {
       if (typeof window !== "undefined" && !audioCtxRef.current) {
+        // @ts-ignore
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         if (AudioContext) {
           audioCtxRef.current = new AudioContext();
