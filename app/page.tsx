@@ -62,10 +62,13 @@ export default function BubbleWrapPage() {
   const initAudio = () => {
     try {
       if (typeof window !== "undefined" && !audioCtxRef.current) {
-        // @ts-ignore
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        if (AudioContext) {
-          audioCtxRef.current = new AudioContext();
+        // Safe, type-checked lookup that bypasses the global window type error
+        const SelectedAudioContext = 
+          window.AudioContext || 
+          (window as any).webkitAudioContext;
+          
+        if (SelectedAudioContext) {
+          audioCtxRef.current = new SelectedAudioContext();
         }
       }
     } catch (err) {
