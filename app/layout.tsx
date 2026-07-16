@@ -11,7 +11,11 @@ export const metadata = {
   description: "A gentle, no-pressure bubble wrap popping game for anxiety relief.",
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ 
+  children 
+}: { 
+  children: React.ReactNode 
+}) {
   return (
     <html lang="en">
       <body className={fredoka.className}>{children}</body>
