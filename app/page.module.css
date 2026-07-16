@@ -170,17 +170,21 @@
 .footer {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
-  margin-top: 2rem;
-  animation: fadeIn 0.5s ease-out;
+  gap: 1rem;
+  margin-top: auto;
+  border-top: 1px solid #eeeeee;
+  padding-top: 1rem;
+  /* 👇 ADD THIS NEW LINE 👇 */
+  align-items: center; 
 }
 
 .stats {
-  font-size: 1.1rem;
+  font-family: var(--font-fredoka), sans-serif;
+  font-size: 0.9rem;
+  color: #666666;
   font-weight: 500;
-  color: #6C849E;
-  letter-spacing: 0.5px;
+  /* 👇 ADD THIS NEW LINE 👇 */
+  text-align: center;
 }
 
 .actions {
