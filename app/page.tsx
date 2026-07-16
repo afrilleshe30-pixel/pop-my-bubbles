@@ -27,10 +27,9 @@ export default function BubbleWrapPage() {
   // Track high-frequency/rapid clicks to prevent UI glitches
   const lastClickTimeRef = useRef(0);
   
-  // Create Web Audio context lazily on first user interaction
-  const audioCtxRef = useRef(null);
+  // Create Web Audio context lazily on first user interaction with <any> type safety bypass
+  const audioCtxRef = useRef<any>(null);
 
-  // Initialize Audio Context on first interaction safely
   // Initialize Audio Context on first interaction safely
   const initAudio = () => {
     try {
@@ -55,7 +54,7 @@ export default function BubbleWrapPage() {
     if (!ctx) return;
 
     if (ctx.state === "suspended") {
-      ctx.resume().catch((err) => console.log("Audio context resume failed:", err));
+      ctx.resume().catch((err: any) => console.log("Audio context resume failed:", err));
     }
 
     try {
@@ -88,7 +87,7 @@ export default function BubbleWrapPage() {
   };
 
   // Handle bubble popping logic safely
-  const handlePop = (index) => {
+  const handlePop = (index: number) => {
     if (bubbles[index] || isRefilling) return;
 
     const now = Date.now();
